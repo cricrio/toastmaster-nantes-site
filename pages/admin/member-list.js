@@ -1,5 +1,5 @@
 import { Box, Heading, VStack } from "@chakra-ui/react";
-import privateRoute from "components/layout/PrivateRoute";
+import privateRoute from "components/layout/privateRoute";
 import UserDetail from "components/UserDetail";
 
 const MemberList = () => (
