@@ -1,12 +1,6 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  HStack,
-  Input,
-} from "@chakra-ui/react";
+import { Button, HStack, VStack } from "@chakra-ui/react";
 import BackgroundContainer from "components/layout/BackgroundContainer";
+import Form from "./Form";
 
 const RegisterMeeting = ({ onSubmit = () => {} }) => {
   return (
@@ -14,17 +8,25 @@ const RegisterMeeting = ({ onSubmit = () => {} }) => {
       title="Assister à la première réunion"
       subtitle="Prochaine réunion le 5 mars 2021"
     >
-      <HStack>
-        <FormControl id="no">
-          <FormLabel>Prénom</FormLabel>
-          <Input placeholder="Bob marley" />
-        </FormControl>
-        <FormControl id="email">
-          <FormLabel>Email</FormLabel>
-          <Input type="email" placeholder="my@email.fr" />
-        </FormControl>
-      </HStack>
-      <Button mt="2">Rejoindre</Button>
+      <Form onSubmit={console.log}>
+        <VStack mb="2">
+          <Form.Input
+            name="name"
+            title="Name"
+            placeholder="Bob marley"
+            required
+          />
+          <Form.Input
+            name="email"
+            title="Email"
+            placeholder="my@email.fr"
+            required
+          />
+          <Button type="submit" isFullWidth>
+            Rejoindre
+          </Button>
+        </VStack>
+      </Form>
     </BackgroundContainer>
   );
 };

@@ -12,7 +12,6 @@ const BackgroundContainer = ({ title, subtitle, children }) => (
           </Heading>
         )}
       </Box>
-
       {children}
     </Box>
     <Image

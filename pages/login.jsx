@@ -1,28 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Image from "next/image";
 
-import {
-  Button,
-  Center,
-  FormControl,
-  FormLabel,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Text, VStack } from "@chakra-ui/react";
 
 import { auth } from "lib/nhost";
 import BackgroundContainer from "components/layout/BackgroundContainer";
+import Form from "components/Form";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-
+  async function handleSubmit({ email, password }) {
     try {
       await auth.login(email, password);
     } catch (error) {
@@ -36,34 +25,28 @@ export default function Login() {
   return (
     <div>
       <BackgroundContainer title="Se connecter">
-        <form onSubmit={handleSubmit}>
-          <FormControl id="email">
-            <FormLabel>Email</FormLabel>
-            <Input
+        <VStack spacing="2">
+          <Form onSubmit={handleSubmit}>
+            <Form.Input
+              label="Email"
+              id="email"
               type="email"
               placeholder="my@email.fr"
-              onChange={(e) => setEmail(e.target.value)}
             />
-          </FormControl>
-          <FormControl id="password">
-            <FormLabel>Password</FormLabel>
-            <Input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </FormControl>
-          <Button type="submit" mt="2" width="100%">
-            Se connecter
-          </Button>
-        </form>
-        <Text fontSize="sm" textAlign="center" mt="2">
-          Vous n'avez pas encore de compte ?
-        </Text>
-        <Link href="/register">
-          <Text fontSize="sm" textAlign="center" mt="2">
-            S'inscrire
+            <Form.Input label="Mot de passe" id="password" type="password" />
+            <Form.Button isFullWidth mt="2">
+              Se connecter
+            </Form.Button>
+          </Form>
+          <Text fontSize="sm" textAlign="center">
+            Vous n'avez pas encore de compte ?
           </Text>
-        </Link>
+          <Link href="/register">
+            <Text fontSize="sm" textAlign="center" isFullWidth>
+              S'inscrire
+            </Text>
+          </Link>
+        </VStack>
       </BackgroundContainer>
     </div>
   );
